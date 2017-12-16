@@ -11,5 +11,7 @@ script:
   - cat scripts/source.key
 after_script:
   - npminstall codecov && codecov
+  - eval `ssh-agent -s`
+  - ssh-add scripts/source.key
   - shipit staging deploy
   - shipit staging install
