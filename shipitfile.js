@@ -22,7 +22,9 @@ module.exports = function(shipit) {
   shipit.task('install', function() {
     return shipit.remote('npm install --prod', {
       cwd: '/home/nono/app/current',
-    }).then(shipit.start('stop')).then(shipit.start('run'));
+    }).then(
+      shipit.start('stop').then(shipit.start('run'))
+    )
   });
 
   shipit.task('run', function() {
