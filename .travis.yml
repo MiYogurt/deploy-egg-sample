@@ -1,6 +1,6 @@
 sudo: false
 language: node_js
-addones:
+addons:
   known_hosts: 139.199.227.41
 node_js:
   - '9'
