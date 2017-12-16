@@ -3,15 +3,14 @@ language: node_js
 node_js:
   - '9'
 before_install:
-  - openssl aes-256-cbc -K $encrypted_b8bda4515144_key -iv $encrypted_b8bda4515144_iv -in scripts/source.key.enc -out scripts/source.key -d
+  - openssl aes-256-cbc -K $encrypted_b8bda4515144_key -iv $encrypted_b8bda4515144_iv -in source.key.enc -out source.key -d
 install:
   - npm i npminstall && npminstall
 script:
   - npm run ci
-  - cat scripts/source.key
 after_script:
   - npminstall codecov && codecov
-  - eval `ssh-agent -s`
-  - ssh-add scripts/source.key
+  - chmod 600 scripts/source.key
+  - ssh -o "StrictHostKeyChecking no" root@139.199.227.41 -i scripts/source.key && exit
   - shipit staging deploy
   - shipit staging install
