@@ -6,12 +6,12 @@ node_js:
   - '9'
 before_install:
   - openssl aes-256-cbc -K $encrypted_b8bda4515144_key -iv $encrypted_b8bda4515144_iv -in scripts/source.key.enc -out scripts/source.key -d
-install:
-  - npm i npminstall && npminstall
-script:
-  - npm run ci
+# install:
+#   - npm i npminstall && npminstall
+# script:
+#   - npm run ci
 after_script:
-  - npminstall codecov && codecov
+  # - npminstall codecov && codecov
   - chmod 600 scripts/source.key
   - shipit staging deploy
-  - shipit staging install
+  - shipit staging docker
