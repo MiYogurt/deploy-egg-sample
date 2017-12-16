@@ -31,7 +31,7 @@ module.exports = function(shipit) {
   });
 
   shipit.blTask('create', function() {
-    return shipit.remote('docker run --name app nodelover:v1', {
+    return shipit.remote('docker run --name app -p 8080:7001 nodelover:v1', {
       cwd: '/home/nono/app/current',
     });
   });
