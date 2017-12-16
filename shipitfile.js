@@ -20,7 +20,7 @@ module.exports = function(shipit) {
   });
 
   shipit.task('docker', function() {
-      return shipit.start(['build','remove', 'create']);
+    return shipit.start([ 'build', 'remove', 'create' ]);
   });
 
   shipit.blTask('build', function() {
@@ -37,11 +37,9 @@ module.exports = function(shipit) {
 
   shipit.blTask('remove', function() {
     return shipit.remote('docker stop app', {
-      cwd: '/home/nono/app/current',
-    }).then(() => {
-      shipit.remote('docker rm app', {
-        cwd: '/home/nono/app/current',
-      });
+          cwd: '/home/nono/app/current',
+        }).then(o => shipit.remote('docker rm app', {
+          cwd: '/home/nono/app/current',
+        })).catch(err => console.log("no need stop"))
     });
-  });
 };
