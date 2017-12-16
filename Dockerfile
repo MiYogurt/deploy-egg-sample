@@ -8,4 +8,4 @@ workdir /app
 
 run npm i
 
-run npm run start
+cmd npm run start
