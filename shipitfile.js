@@ -22,9 +22,10 @@ module.exports = function(shipit) {
   shipit.task('install', function() {
     return shipit.remote('npm install --prod', {
       cwd: '/home/nono/app/current',
-    }).then(
-      shipit.start('stop').then(shipit.start('run'))
-    )
+    }).then(() => {
+      shipit.start('stop');
+      return shipit.start('run');
+    });
   });
 
   shipit.task('run', function() {
@@ -33,7 +34,7 @@ module.exports = function(shipit) {
     });
   });
 
-  shipit.task('stop', function() {
+  shipit.blTask('stop', function() {
     return shipit.remote('npm run stop', {
       cwd: '/home/nono/app/current',
     });
