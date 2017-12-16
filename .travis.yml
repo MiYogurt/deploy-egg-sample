@@ -3,7 +3,7 @@ language: node_js
 node_js:
   - '9'
 before_install:
-  - openssl aes-256-cbc -K $encrypted_b8bda4515144_key -iv $encrypted_b8bda4515144_iv -in source.key.enc -out source.key -d
+  - openssl aes-256-cbc -K $encrypted_b8bda4515144_key -iv $encrypted_b8bda4515144_iv -in scripts/source.key.enc -out scripts/source.key -d
 install:
   - npm i npminstall && npminstall
 script:
