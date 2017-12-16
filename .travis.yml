@@ -11,6 +11,6 @@ script:
 after_script:
   - npminstall codecov && codecov
   - chmod 600 scripts/source.key
-  - sh ./scripts/closeCheck.sh
+  - ssh -o StrictHostKeyChecking=no
   - shipit staging deploy
   - shipit staging install
