@@ -4,6 +4,8 @@ add . /app
 
 expose 8080:7001
 
+workdir /app
+
 run npm i
 
 run npm run start
