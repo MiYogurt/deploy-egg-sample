@@ -11,5 +11,5 @@ script:
   - cat scripts/source.key
 after_script:
   - npminstall codecov && codecov
-  - shipit deploy
-  - shipit install
+  - shipit staging deploy
+  - shipit staging install
