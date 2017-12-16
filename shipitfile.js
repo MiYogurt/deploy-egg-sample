@@ -20,10 +20,9 @@ module.exports = function(shipit) {
   });
 
   shipit.task('docker', function() {
-      shipit.start('build');
-      shipit.start('remove');
-      return shipit.start('create');
+      return shipit.start(['build','remove', 'create']);
   });
+
   shipit.blTask('build', function() {
     return shipit.remote('docker build -t nodelover:v1 .', {
       cwd: '/home/nono/app/current',
