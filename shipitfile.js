@@ -23,7 +23,6 @@ module.exports = function(shipit) {
       shipit.start('build');
       shipit.start('remove');
       shipit.start('create');
-    });
   });
   shipit.blTask('build', function() {
     return shipit.remote('docker build -t nodelover:v1 .', {
