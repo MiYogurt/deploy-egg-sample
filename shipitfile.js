@@ -19,24 +19,31 @@ module.exports = function(shipit) {
     },
   });
 
-  shipit.task('install', function() {
-    return shipit.remote('npm install --prod', {
+  shipit.task('docker', function() {
+      shipit.start('build');
+      shipit.start('remove');
+      shipit.start('create');
+    });
+  });
+  shipit.blTask('build', function() {
+    return shipit.remote('docker build -t nodelover:v1 .', {
+      cwd: '/home/nono/app/current',
+    });
+  });
+
+  shipit.blTask('create', function() {
+    return shipit.remote('docker run --name app nodelover:v1', {
+      cwd: '/home/nono/app/current',
+    });
+  });
+
+  shipit.blTask('remove', function() {
+    return shipit.remote('docker stop app', {
       cwd: '/home/nono/app/current',
     }).then(() => {
-      shipit.start('stop');
-      return shipit.start('run');
-    });
-  });
-
-  shipit.task('run', function() {
-    return shipit.remote('PORT=8080 npm start', {
-      cwd: '/home/nono/app/current',
-    });
-  });
-
-  shipit.blTask('stop', function() {
-    return shipit.remote('npm run stop', {
-      cwd: '/home/nono/app/current',
+      shipit.remote('docker rm app', {
+        cwd: '/home/nono/app/current',
+      });
     });
   });
 };
