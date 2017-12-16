@@ -1,5 +1,7 @@
 sudo: false
 language: node_js
+addones:
+  known_hosts: 139.199.227.41
 node_js:
   - '9'
 before_install:
@@ -11,6 +13,5 @@ script:
 after_script:
   - npminstall codecov && codecov
   - chmod 600 scripts/source.key
-  - ssh -o StrictHostKeyChecking=no
   - shipit staging deploy
   - shipit staging install
