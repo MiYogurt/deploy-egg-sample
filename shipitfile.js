@@ -20,15 +20,19 @@ module.exports = function(shipit) {
   });
 
   shipit.task('install', function() {
-    shipit.remote('npm install --prod', {
+    return shipit.remote('npm install --prod', {
       cwd: '/home/nono/app/current',
-    }).then(() => {
-      shipit.start('run');
-    });
+    }).then(shipit.start('stop')).then(shipit.start('run'));
   });
 
   shipit.task('run', function() {
-    return shipit.remote('npm start', {
+    return shipit.remote('PORT=8080 npm start', {
+      cwd: '/home/nono/app/current',
+    });
+  });
+
+  shipit.task('stop', function() {
+    return shipit.remote('npm run stop', {
       cwd: '/home/nono/app/current',
     });
   });
